@@ -1,4 +1,4 @@
-package lincete.galaxyegg;
+package lincete.galaxyegg.ui;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -19,8 +19,10 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 
+import lincete.galaxyegg.R;
 
-public class MainActivity extends AppCompatActivity {
+
+public class OldMainActivity extends AppCompatActivity {
     private InterstitialAd mInterstitialAd;
     int x;
     boolean musica,animacion = true;
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         Resources res = getResources();
         x= res.getInteger(R.integer.trolaso);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.old_activity_main);
         TextView hola = (TextView) findViewById(R.id.textoArriba);
         SharedPreferences prefe=getSharedPreferences("datos", Context.MODE_PRIVATE);
         x = prefe.getInt("x",x);
