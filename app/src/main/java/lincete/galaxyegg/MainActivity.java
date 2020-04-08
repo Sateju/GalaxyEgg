@@ -1,4 +1,4 @@
-package lincete.GalaxyEgg;
+package lincete.galaxyegg;
 
 import android.content.Context;
 import android.content.SharedPreferences;
