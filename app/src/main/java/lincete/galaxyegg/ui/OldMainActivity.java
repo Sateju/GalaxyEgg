@@ -196,12 +196,12 @@ public void onClick(View v)
             ImageView imagen2 = (ImageView)findViewById(R.id.imageView);
         if(musica)
         {
-            imagen2.setImageResource(R.drawable.voff);
+            imagen2.setImageResource(R.drawable.volume_off);
             musica = false;
         }
             else
         {
-            imagen2.setImageResource(R.drawable.von);
+            imagen2.setImageResource(R.drawable.volume_on);
             musica = true;
         }
         }
