@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="si">oui!</string>
+    <string name="no">Pas maintenant</string>
+    <string name="ganado">vous avez gagne !</string>
+</resources>

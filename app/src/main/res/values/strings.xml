@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name" translatable="false">Space Egg</string>
+    <integer name="trolaso">1000000</integer>
+    <string name="si">Yes!</string>
+    <string name="no">Not now</string>
+    <string name="ganado">You win!</string>
+    <string name="alerta" translatable="false">notused</string>
+</resources>

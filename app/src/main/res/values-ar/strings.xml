@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="si">نعم</string>
+    <string name="no">ليس الآن</string>
+    <string name="ganado">أنت تربح!</string>
+</resources>

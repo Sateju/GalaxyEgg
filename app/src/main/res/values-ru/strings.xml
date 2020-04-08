@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ganado">ты победил!</string>
+    <string name="no">не сейчас</string>
+    <string name="si">Да</string>
+</resources>
