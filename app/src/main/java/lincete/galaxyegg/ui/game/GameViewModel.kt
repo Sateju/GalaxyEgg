@@ -75,11 +75,16 @@ class GameViewModel(
     }
 
     fun onVolumeChanged() {
-
+        // TODO remove, just for testing
+        egg.value?.apply {
+            count = count--
+        }
     }
 
     fun onEggClicked() {
-
+        egg.value?.apply {
+            count = count--
+        }
     }
 
     /**
@@ -90,6 +95,10 @@ class GameViewModel(
      */
     override fun onCleared() {
         super.onCleared()
+        uiScope.launch {
+           val oldEgg = egg.value ?: return@launch
+            update(oldEgg)
+        }
         viewModelJob.cancel()
     }
 }
