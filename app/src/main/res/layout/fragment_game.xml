@@ -33,7 +33,7 @@
             android:gravity="center"
             android:textColor="@android:color/white"
             android:textSize="@dimen/game_countdown_text_size"
-            android:text="@{gameViewModel.eggCount}"
+            android:text="@{gameViewModel.eggCountText}"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

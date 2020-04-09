@@ -1,10 +1,7 @@
 package lincete.galaxyegg.ui.game
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import kotlinx.coroutines.*
 import lincete.galaxyegg.R
 import lincete.galaxyegg.data.database.EggDatabaseDao
@@ -33,9 +30,13 @@ class GameViewModel(
 
     private val egg = MutableLiveData<EggEntity>()
 
+    private val _eggCount = MutableLiveData<Long>()
+    private val eggCount: LiveData<Long>
+        get() = _eggCount
+
     // The string version of the egg count
-    val eggCount = Transformations.map(egg) { egg ->
-        egg.count.toString()
+    val eggCountText = Transformations.map(eggCount) { eggCount ->
+        eggCount.toString()
     }
 
     init {
@@ -53,6 +54,7 @@ class GameViewModel(
                 egg.value = newEgg
                 insert(newEgg)
             }
+            _eggCount.value = egg.value?.count
         }
     }
 
@@ -75,16 +77,12 @@ class GameViewModel(
     }
 
     fun onVolumeChanged() {
-        // TODO remove, just for testing
-        egg.value?.apply {
-            count = count--
-        }
+        _eggCount.value = _eggCount.value?.minus(1)
+        TODO("remove, just for testing")
     }
 
     fun onEggClicked() {
-        egg.value?.apply {
-            count = count--
-        }
+        TODO("implement")
     }
 
     /**
@@ -96,8 +94,9 @@ class GameViewModel(
     override fun onCleared() {
         super.onCleared()
         uiScope.launch {
-           val oldEgg = egg.value ?: return@launch
-            update(oldEgg)
+            TODO("implement")
+            //val oldEgg = _egg.value ?: return@launch
+            //update(oldEgg)
         }
         viewModelJob.cancel()
     }
