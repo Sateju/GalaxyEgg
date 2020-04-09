@@ -31,7 +31,7 @@ public class OldMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         Resources res = getResources();
-        x= res.getInteger(R.integer.trolaso);
+        x= res.getInteger(R.integer.countdown_initial_value);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.old_activity_main);
         TextView hola = (TextView) findViewById(R.id.textoArriba);

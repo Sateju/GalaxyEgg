@@ -1,5 +1,5 @@
 <resources>
-    <integer name="trolaso">1000000</integer>
+    <integer name="countdown_initial_value">1000000</integer>
     <string name="no">Ahora no</string>
     <string name="si">Sí!.</string>
     <string name="ganado">Has ganado!</string>

@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name" translatable="false">Space Egg</string>
-    <integer name="trolaso">1000000</integer>
+
     <string name="si">Yes!</string>
     <string name="no">Not now</string>
     <string name="ganado">You win!</string>
-    <string name="alerta" translatable="false">notused</string>
+
+    <string name="game_sound_button_content_description">Activate or Deactivate Sound</string>
+    <string name="game_egg_image_content_description">Egg</string>
 </resources>

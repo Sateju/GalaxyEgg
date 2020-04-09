@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="gameViewModel"
+            type="lincete.galaxyegg.ui.game.GameViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -8,14 +16,40 @@
         android:background="@drawable/space_background">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/game_volume_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="@dimen/default_view_margin"
-            android:onClick="buttonOnClick2"
+            android:contentDescription="@string/game_sound_button_content_description"
+            android:onClick="@{() -> gameViewModel.onVolumeChanged()}"
             android:src="@drawable/volume_off"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/game_countdown_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/game_countdown_text_size"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/game_volume_button"
+            tools:text="1000000" />
+
+        <ImageView
+            android:id="@+id/game_egg_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:onClick="@{() -> gameViewModel.onEggClicked()}"
+            android:contentDescription="@string/game_egg_image_content_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/game_volume_button"
+            tools:src="@drawable/a100" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
