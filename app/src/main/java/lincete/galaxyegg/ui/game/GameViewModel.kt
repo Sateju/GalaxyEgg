@@ -3,16 +3,16 @@ package lincete.galaxyegg.ui.game
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.*
+import lincete.galaxyegg.R
 import lincete.galaxyegg.data.database.EggDatabaseDao
 import lincete.galaxyegg.data.database.EggEntity
 
 class GameViewModel(
-        val database: EggDatabaseDao,
+        private val database: EggDatabaseDao,
         application: Application) : AndroidViewModel(application) {
-
-    /** Coroutine variables */
 
     /**
      * viewModelJob allows us to cancel all coroutines started by this ViewModel.
@@ -31,21 +31,46 @@ class GameViewModel(
      */
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private var egg = MutableLiveData<EggEntity?>()
+    private val egg = MutableLiveData<EggEntity>()
 
-    init {
-        initializeEgg()
+    // The string version of the egg count
+    val eggCount = Transformations.map(egg) { egg ->
+        egg.count.toString()
     }
 
-    private fun initializeEgg() {
+    init {
+        initializeEgg(application)
+    }
+
+    private fun initializeEgg(application: Application) {
         uiScope.launch {
-            egg.value = getEggFromDatabase()
+            val eggFromDatabase = getEggFromDatabase()
+            if (eggFromDatabase != null) {
+                egg.value = getEggFromDatabase()
+            } else {
+                val newEgg = EggEntity(count =
+                application.resources.getInteger(R.integer.countdown_initial_value).toLong())
+                egg.value = newEgg
+                insert(newEgg)
+            }
         }
     }
 
     private suspend fun getEggFromDatabase(): EggEntity? {
         return withContext(Dispatchers.IO) {
             database.getEggCount()
+        }
+    }
+
+    private suspend fun insert(egg: EggEntity) {
+        return withContext(Dispatchers.IO) {
+            database.insert(egg)
+        }
+    }
+
+    private suspend fun update(egg: EggEntity) {
+        return withContext(Dispatchers.IO) {
+            database.update(egg)
         }
     }
 
