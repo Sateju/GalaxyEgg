@@ -1,8 +1,12 @@
 package lincete.galaxyegg.ui.game
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import lincete.galaxyegg.data.database.EggDatabaseDao
 
-class GameViewModel : ViewModel() {
+class GameViewModel(
+        val eggDao: EggDatabaseDao,
+        application: Application) : AndroidViewModel(application) {
 
 
     fun onVolumeChanged() {
