@@ -6,27 +6,11 @@ import kotlinx.coroutines.*
 import lincete.galaxyegg.R
 import lincete.galaxyegg.data.database.EggDatabaseDao
 import lincete.galaxyegg.data.database.EggEntity
+import lincete.galaxyegg.ui.base.BaseViewModel
 
 class GameViewModel(
         private val database: EggDatabaseDao,
-        application: Application) : AndroidViewModel(application) {
-
-    /**
-     * viewModelJob allows us to cancel all coroutines started by this ViewModel.
-     */
-    private var viewModelJob = Job()
-
-    /**
-     * A [CoroutineScope] keeps track of all coroutines started by this ViewModel.
-     *
-     * Because we pass it [viewModelJob], any coroutine started in this uiScope can be cancelled
-     * by calling `viewModelJob.cancel()`
-     *
-     * By default, all coroutines started in uiScope will launch in [Dispatchers.Main] which is
-     * the main thread on Android. This is a sensible default because most coroutines started by
-     * a [ViewModel] update the UI after performing some processing.
-     */
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+        application: Application) : BaseViewModel(application) {
 
     private val egg = MutableLiveData<EggEntity>()
 
@@ -44,7 +28,7 @@ class GameViewModel(
     }
 
     private fun initializeEgg(application: Application) {
-        uiScope.launch {
+        launch {
             val eggFromDatabase = getEggFromDatabase()
             if (eggFromDatabase != null) {
                 egg.value = getEggFromDatabase()
@@ -85,19 +69,13 @@ class GameViewModel(
         TODO("implement")
     }
 
-    /**
-     * Called when the ViewModel is dismantled.
-     * At this point, we want to cancel all coroutines;
-     * otherwise we end up with processes that have nowhere to return to
-     * using memory and resources.
-     */
+
     override fun onCleared() {
         super.onCleared()
-        uiScope.launch {
+        launch {
             TODO("implement")
             //val oldEgg = _egg.value ?: return@launch
             //update(oldEgg)
         }
-        viewModelJob.cancel()
     }
 }
