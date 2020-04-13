@@ -20,12 +20,6 @@ class GameViewModel(
     private val egg: LiveData<EggEntity>
         get() = _egg
 
-    // The string version of the egg
-    val eggCountText = Transformations.map(egg) { egg ->
-        egg.count.toString()
-    }
-
-    /*
     private val _eggCount = MutableLiveData<Long>()
     private val eggCount: LiveData<Long>
         get() = _eggCount
@@ -34,7 +28,6 @@ class GameViewModel(
     val eggCountText = Transformations.map(eggCount) { eggCount ->
         eggCount.toString()
     }
-     */
 
     init {
         initializeEgg(application)
@@ -43,22 +36,19 @@ class GameViewModel(
     private fun initializeEgg(application: Application) {
         launch {
             val eggFromDatabase = getEggFromDatabase()
-            if (eggFromDatabase != null) {
-                _egg.value = getEggFromDatabase()
+            if (eggFromDatabase.value != null) {
+                _egg.value = eggFromDatabase.value
             } else {
                 val newEgg = EggEntity(count =
                 application.resources.getInteger(R.integer.countdown_initial_value).toLong())
                 _egg.value = newEgg
                 insert(newEgg)
             }
+            _eggCount.value = _egg.value?.count
         }
     }
 
-    private suspend fun getEggFromDatabase(): EggEntity? {
-        return withContext(Dispatchers.IO) {
-            database.getEgg()
-        }
-    }
+    private fun getEggFromDatabase(): LiveData<EggEntity?> = database.getEgg()
 
     private suspend fun insert(egg: EggEntity) {
         return withContext(Dispatchers.IO) {
@@ -74,20 +64,8 @@ class GameViewModel(
 
     fun onVolumeChanged() {
         _eggCount.value = _eggCount.value?.minus(1)
-        TODO("remove, just for testing")
     }
 
     fun onEggClicked() {
-        TODO("implement")
-    }
-
-
-    override fun onCleared() {
-        super.onCleared()
-        launch {
-            TODO("implement")
-            //val oldEgg = _egg.value ?: return@launch
-            //update(oldEgg)
-        }
     }
 }
