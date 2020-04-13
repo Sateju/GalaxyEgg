@@ -23,7 +23,7 @@ class GameFragment : Fragment() {
         val application = requireNotNull(this.activity).application
 
         // Create an instance of the ViewModel Factory.
-        val dataSource = EggDatabase.getInstance(application).eggDatabaseDao
+        val dataSource = EggDatabase.getInstance(application).eggDao
         val viewModelFactory = GameViewModelFactory(dataSource, application)
 
         // Get a reference to the ViewModel associated with this fragment.

@@ -1,19 +1,31 @@
 package lincete.galaxyegg.ui.game
 
 import android.app.Application
-import androidx.lifecycle.*
-import kotlinx.coroutines.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import lincete.galaxyegg.R
-import lincete.galaxyegg.data.database.EggDatabaseDao
+import lincete.galaxyegg.data.database.EggDao
 import lincete.galaxyegg.data.database.EggEntity
 import lincete.galaxyegg.ui.base.BaseViewModel
 
 class GameViewModel(
-        private val database: EggDatabaseDao,
+        private val database: EggDao,
         application: Application) : BaseViewModel(application) {
 
-    private val egg = MutableLiveData<EggEntity>()
+    private val _egg = MutableLiveData<EggEntity>()
+    private val egg: LiveData<EggEntity>
+        get() = _egg
 
+    // The string version of the egg
+    val eggCountText = Transformations.map(egg) { egg ->
+        egg.count.toString()
+    }
+
+    /*
     private val _eggCount = MutableLiveData<Long>()
     private val eggCount: LiveData<Long>
         get() = _eggCount
@@ -22,6 +34,7 @@ class GameViewModel(
     val eggCountText = Transformations.map(eggCount) { eggCount ->
         eggCount.toString()
     }
+     */
 
     init {
         initializeEgg(application)
@@ -31,20 +44,19 @@ class GameViewModel(
         launch {
             val eggFromDatabase = getEggFromDatabase()
             if (eggFromDatabase != null) {
-                egg.value = getEggFromDatabase()
+                _egg.value = getEggFromDatabase()
             } else {
                 val newEgg = EggEntity(count =
                 application.resources.getInteger(R.integer.countdown_initial_value).toLong())
-                egg.value = newEgg
+                _egg.value = newEgg
                 insert(newEgg)
             }
-            _eggCount.value = egg.value?.count
         }
     }
 
     private suspend fun getEggFromDatabase(): EggEntity? {
         return withContext(Dispatchers.IO) {
-            database.getEggCount()
+            database.getEgg()
         }
     }
 

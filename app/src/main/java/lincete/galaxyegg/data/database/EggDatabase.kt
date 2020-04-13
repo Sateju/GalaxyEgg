@@ -11,7 +11,7 @@ abstract class EggDatabase : RoomDatabase() {
     /**
      * Connects the database to the DAO.
      */
-    abstract val eggDatabaseDao: EggDatabaseDao
+    abstract val eggDao: EggDao
 
     /**
      * Define a companion object, this allows us to add functions on the EggDatabase class.

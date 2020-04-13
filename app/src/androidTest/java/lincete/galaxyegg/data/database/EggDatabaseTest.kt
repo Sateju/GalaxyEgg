@@ -17,7 +17,7 @@ import java.io.IOException
 @RunWith(AndroidJUnit4::class)
 class EggDatabaseTest {
 
-    private lateinit var eggDao: EggDatabaseDao
+    private lateinit var eggDao: EggDao
     private lateinit var database: EggDatabase
 
     @Before
@@ -29,7 +29,7 @@ class EggDatabaseTest {
                 // Allowing main thread queries, just for testing.
                 .allowMainThreadQueries()
                 .build()
-        eggDao = database.eggDatabaseDao
+        eggDao = database.eggDao
     }
 
     @After

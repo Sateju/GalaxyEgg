@@ -3,10 +3,10 @@ package lincete.galaxyegg.ui.game
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import lincete.galaxyegg.data.database.EggDatabaseDao
+import lincete.galaxyegg.data.database.EggDao
 
 class GameViewModelFactory(
-        private val dataSource: EggDatabaseDao,
+        private val dataSource: EggDao,
         private val application: Application) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
