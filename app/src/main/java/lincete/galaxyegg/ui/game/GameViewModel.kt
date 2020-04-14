@@ -16,6 +16,10 @@ class GameViewModel(
         private val database: EggDao,
         application: Application) : BaseViewModel(application) {
 
+    private val _isVolumeActive = MutableLiveData<Boolean>()
+    val isVolumeActive: LiveData<Boolean>
+        get() = _isVolumeActive
+
     private val _egg = MutableLiveData<EggEntity>()
     private val egg: LiveData<EggEntity>
         get() = _egg
@@ -30,7 +34,12 @@ class GameViewModel(
     }
 
     init {
+        initializeVolumeButton()
         initializeEgg(application)
+    }
+
+    private fun initializeVolumeButton() {
+        _isVolumeActive.value = false
     }
 
     private fun initializeEgg(application: Application) {
@@ -67,7 +76,7 @@ class GameViewModel(
     }
 
     fun onVolumeChanged() {
-
+        _isVolumeActive.value = isVolumeActive.value?.not()
     }
 
     fun onEggClicked() {

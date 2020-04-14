@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import lincete.galaxyegg.R
 import lincete.galaxyegg.data.database.EggDatabase
@@ -37,6 +38,11 @@ class GameFragment : Fragment() {
         // Specify the fragment view as the lifecycle owner of the binding.
         // This is used so that the binding can observe LiveData updates
         binding.lifecycleOwner = this
+
+        gameViewModel.isVolumeActive.observe(viewLifecycleOwner, Observer { isVolumeActive ->
+            val volumeDrawable = if (isVolumeActive) R.drawable.volume_on else R.drawable.volume_off
+            binding.gameVolumeButton.setImageResource(volumeDrawable)
+        })
 
         return binding.root
     }
