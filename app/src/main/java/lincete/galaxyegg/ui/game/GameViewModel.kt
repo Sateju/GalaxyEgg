@@ -67,6 +67,10 @@ class GameViewModel(
     }
 
     fun onVolumeChanged() {
+
+    }
+
+    fun onEggClicked() {
         egg.value?.apply {
             count = count.minus(1)
             _eggCount.value = count
@@ -76,8 +80,5 @@ class GameViewModel(
                 update(egg)
             }
         }
-    }
-
-    fun onEggClicked() {
     }
 }
