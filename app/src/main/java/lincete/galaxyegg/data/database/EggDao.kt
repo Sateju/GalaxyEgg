@@ -1,6 +1,5 @@
 package lincete.galaxyegg.data.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -36,5 +35,5 @@ interface EggDao {
      * Selects and returns the only Egg value
      */
     @Query("SELECT * FROM egg_table ORDER BY eggId DESC LIMIT 1")
-    fun getEgg(): LiveData<EggEntity?>
+    fun getEgg(): EggEntity?
 }

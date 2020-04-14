@@ -36,8 +36,8 @@ class GameViewModel(
     private fun initializeEgg(application: Application) {
         launch {
             val eggFromDatabase = getEggFromDatabase()
-            if (eggFromDatabase.value != null) {
-                _egg.value = eggFromDatabase.value
+            if (eggFromDatabase != null) {
+                _egg.value = eggFromDatabase
             } else {
                 val newEgg = EggEntity(count =
                 application.resources.getInteger(R.integer.countdown_initial_value).toLong())
@@ -48,7 +48,11 @@ class GameViewModel(
         }
     }
 
-    private fun getEggFromDatabase(): LiveData<EggEntity?> = database.getEgg()
+    private suspend fun getEggFromDatabase(): EggEntity? {
+        return withContext(Dispatchers.IO) {
+            database.getEgg()
+        }
+    }
 
     private suspend fun insert(egg: EggEntity) {
         return withContext(Dispatchers.IO) {
@@ -63,7 +67,15 @@ class GameViewModel(
     }
 
     fun onVolumeChanged() {
-        _eggCount.value = _eggCount.value?.minus(1)
+        egg.value?.apply {
+            count = count.minus(1)
+            _eggCount.value = count
+        }
+        egg.value?.let { egg ->
+            launch {
+                update(egg)
+            }
+        }
     }
 
     fun onEggClicked() {
