@@ -1,21 +1,15 @@
 package lincete.galaxyegg.ui.game
 
 import android.app.Application
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import lincete.galaxyegg.R
 import lincete.galaxyegg.data.database.EggDao
 import lincete.galaxyegg.data.database.EggEntity
-import lincete.galaxyegg.ui.base.BaseViewModel
 
-class GameViewModel(
-        private val database: EggDao,
-        application: Application) : BaseViewModel(application) {
+class GameViewModel(private val database: EggDao, application: Application) : AndroidViewModel(application) {
 
     private val _isVolumeActive = MutableLiveData<Boolean>()
     val isVolumeActive: LiveData<Boolean>
@@ -55,9 +49,6 @@ class GameViewModel(
 
     private fun initializeEgg(application: Application) {
         viewModelScope.launch {
-
-        }
-        launch {
             val eggFromDatabase = getEggFromDatabase()
             if (eggFromDatabase != null) {
                 _egg.value = eggFromDatabase
@@ -99,7 +90,7 @@ class GameViewModel(
             _eggCount.value = count
         }
         egg.value?.let { egg ->
-            launch {
+            viewModelScope.launch {
                 update(egg)
             }
         }
