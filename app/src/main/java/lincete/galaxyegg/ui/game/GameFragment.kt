@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,6 +18,7 @@ class GameFragment : Fragment() {
 
     private lateinit var binding: FragmentGameBinding
     private lateinit var gameViewModel: GameViewModel
+    private lateinit var animation: Animation
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -39,11 +42,38 @@ class GameFragment : Fragment() {
         // This is used so that the binding can observe LiveData updates
         binding.lifecycleOwner = this
 
+        // Volume Button
         gameViewModel.isVolumeActive.observe(viewLifecycleOwner, Observer { isVolumeActive ->
             val volumeDrawable = if (isVolumeActive) R.drawable.volume_on else R.drawable.volume_off
             binding.gameVolumeButton.setImageResource(volumeDrawable)
         })
 
+        setupAnimation()
+
         return binding.root
+    }
+
+    private fun setupAnimation() {
+        animation = AnimationUtils.loadAnimation(context, R.anim.peropot)
+        animation.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationRepeat(p0: Animation?) {
+            }
+
+            override fun onAnimationEnd(p0: Animation?) {
+                gameViewModel.setAnimationIsFinished()
+            }
+
+            override fun onAnimationStart(p0: Animation?) {
+            }
+        })
+
+        gameViewModel.startAnimationEvent.observe(viewLifecycleOwner, Observer { shouldStartAnimation ->
+            if (shouldStartAnimation) {
+                binding.gameEggImage.animation?.apply {
+                    cancel()
+                }
+                binding.gameEggImage.startAnimation(animation)
+            }
+        })
     }
 }

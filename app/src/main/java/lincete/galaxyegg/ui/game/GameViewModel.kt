@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -33,9 +34,14 @@ class GameViewModel(
         eggCount.toString()
     }
 
+    private val _startAnimationEvent = MutableLiveData<Boolean>()
+    val startAnimationEvent: LiveData<Boolean>
+        get() = _startAnimationEvent
+
     init {
         initializeVolumeButton()
         initializeEgg(application)
+        _startAnimationEvent.value = false
     }
 
     private fun initializeVolumeButton() {
@@ -43,6 +49,9 @@ class GameViewModel(
     }
 
     private fun initializeEgg(application: Application) {
+        viewModelScope.launch {
+
+        }
         launch {
             val eggFromDatabase = getEggFromDatabase()
             if (eggFromDatabase != null) {
@@ -89,5 +98,14 @@ class GameViewModel(
                 update(egg)
             }
         }
+        startAnimation()
+    }
+
+    fun setAnimationIsFinished() {
+        _startAnimationEvent.value = false
+    }
+
+    private fun startAnimation() {
+        _startAnimationEvent.value = true
     }
 }
