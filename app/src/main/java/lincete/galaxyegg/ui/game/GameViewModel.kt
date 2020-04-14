@@ -38,10 +38,15 @@ class GameViewModel(
     val startAnimationEvent: LiveData<Boolean>
         get() = _startAnimationEvent
 
+    private val _startSoundEvent = MutableLiveData<Boolean>()
+    val startSoundEvent: LiveData<Boolean>
+        get() = _startSoundEvent
+
     init {
         initializeVolumeButton()
         initializeEgg(application)
         _startAnimationEvent.value = false
+        _startSoundEvent.value = false
     }
 
     private fun initializeVolumeButton() {
@@ -99,6 +104,9 @@ class GameViewModel(
             }
         }
         startAnimation()
+        if (isVolumeActive.value == true) {
+            startSound()
+        }
     }
 
     fun setAnimationIsFinished() {
@@ -107,5 +115,14 @@ class GameViewModel(
 
     private fun startAnimation() {
         _startAnimationEvent.value = true
+    }
+
+    fun setSoundIsFinished() {
+        _startSoundEvent.value = false
+    }
+
+    private fun startSound() {
+        _startSoundEvent.value = false
+        _startSoundEvent.value = true
     }
 }

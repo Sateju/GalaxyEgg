@@ -1,5 +1,6 @@
 package lincete.galaxyegg.ui.game
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ class GameFragment : Fragment() {
     private lateinit var binding: FragmentGameBinding
     private lateinit var gameViewModel: GameViewModel
     private lateinit var animation: Animation
+    private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -49,6 +51,7 @@ class GameFragment : Fragment() {
         })
 
         setupAnimation()
+        setupSound()
 
         return binding.root
     }
@@ -75,5 +78,21 @@ class GameFragment : Fragment() {
                 binding.gameEggImage.startAnimation(animation)
             }
         })
+    }
+
+    private fun setupSound() {
+        mediaPlayer = MediaPlayer.create(context, R.raw.blop2)
+        gameViewModel.startSoundEvent.observe(viewLifecycleOwner, Observer { shouldStartSound ->
+            if (shouldStartSound) {
+                mediaPlayer.start()
+            } else {
+                mediaPlayer.stop()
+            }
+        })
+    }
+
+    override fun onStop() {
+        mediaPlayer.release()
+        super.onStop()
     }
 }
