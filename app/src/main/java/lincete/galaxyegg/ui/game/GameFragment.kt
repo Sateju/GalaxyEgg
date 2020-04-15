@@ -13,6 +13,7 @@ import androidx.navigation.Navigation
 import lincete.galaxyegg.R
 import lincete.galaxyegg.data.database.EggDatabase
 import lincete.galaxyegg.databinding.FragmentGameBinding
+import org.koin.android.ext.android.inject
 
 class GameFragment : Fragment() {
 
@@ -21,17 +22,14 @@ class GameFragment : Fragment() {
     private lateinit var animation: Animation
     private lateinit var mediaPlayer: MediaPlayer
 
+    private val viewModelFactory : GameViewModelFactory by inject()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
         setHasOptionsMenu(true)
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_game, container, false)
-        val application = requireNotNull(this.activity).application
-
-        // Create an instance of the ViewModel Factory.
-        val dataSource = EggDatabase.getInstance(application).eggDao
-        val viewModelFactory = GameViewModelFactory(dataSource, application)
 
         // Get a reference to the ViewModel associated with this fragment.
         gameViewModel = ViewModelProvider(this, viewModelFactory)
