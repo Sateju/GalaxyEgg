@@ -15,11 +15,11 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class GameFragment : Fragment() {
 
+    private val gameViewModel: GameViewModel by viewModel()
+
     private lateinit var binding: FragmentGameBinding
     private lateinit var animation: Animation
     private lateinit var mediaPlayer: MediaPlayer
-
-    private val gameViewModel: GameViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -88,18 +88,15 @@ class GameFragment : Fragment() {
     }
 
     private fun setupSound() {
-        mediaPlayer = MediaPlayer.create(context, R.raw.blop2)
         gameViewModel.startSoundEvent.observe(viewLifecycleOwner, Observer { shouldStartSound ->
+            mediaPlayer = MediaPlayer.create(context, R.raw.blop2)
+            mediaPlayer.setOnCompletionListener { it.release() }
             if (shouldStartSound) {
                 mediaPlayer.start()
             } else {
                 mediaPlayer.stop()
+                mediaPlayer.release()
             }
         })
-    }
-
-    override fun onStop() {
-        mediaPlayer.release()
-        super.onStop()
     }
 }
