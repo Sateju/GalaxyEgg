@@ -8,32 +8,24 @@ import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import lincete.galaxyegg.R
-import lincete.galaxyegg.data.database.EggDatabase
 import lincete.galaxyegg.databinding.FragmentGameBinding
-import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class GameFragment : Fragment() {
 
     private lateinit var binding: FragmentGameBinding
-    private lateinit var gameViewModel: GameViewModel
     private lateinit var animation: Animation
     private lateinit var mediaPlayer: MediaPlayer
 
-    private val viewModelFactory : GameViewModelFactory by inject()
+    private val gameViewModel: GameViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
         setHasOptionsMenu(true)
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_game, container, false)
-
-        // Get a reference to the ViewModel associated with this fragment.
-        gameViewModel = ViewModelProvider(this, viewModelFactory)
-                .get(GameViewModel::class.java)
 
         // Set the viewModel for databinding - this allows the bound layout access
         // to all the data in the VieWModel
