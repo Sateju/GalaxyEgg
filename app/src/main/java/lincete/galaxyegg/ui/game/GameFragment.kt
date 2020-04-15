@@ -2,15 +2,14 @@ package lincete.galaxyegg.ui.game
 
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import lincete.galaxyegg.R
 import lincete.galaxyegg.data.database.EggDatabase
 import lincete.galaxyegg.databinding.FragmentGameBinding
@@ -24,6 +23,8 @@ class GameFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
+        setHasOptionsMenu(true)
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_game, container, false)
         val application = requireNotNull(this.activity).application
@@ -54,6 +55,22 @@ class GameFragment : Fragment() {
         setupSound()
 
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.main_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_settings -> {
+                view?.let {
+                    Navigation.findNavController(it).navigate(GameFragmentDirections.actionSettings())
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setupAnimation() {

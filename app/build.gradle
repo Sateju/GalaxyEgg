@@ -60,6 +60,8 @@ dependencies {
 
     implementation "com.google.android.material:material:$material_design_version"
 
+    implementation "androidx.preference:preference:$preference_version"
+
     // Koin
     implementation "org.koin:koin-android-viewmodel:$koin_core_version"
 

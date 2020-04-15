@@ -9,5 +9,13 @@
         android:id="@+id/gameFragment"
         android:name="lincete.galaxyegg.ui.game.GameFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/fragment_game" />
+        tools:layout="@layout/fragment_game">
+        <action
+            android:id="@+id/action_settings"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="lincete.galaxyegg.ui.settings.SettingsFragment"
+        android:label="@string/preferences_fragment_title" />
 </navigation>
