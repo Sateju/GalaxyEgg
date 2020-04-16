@@ -2,6 +2,7 @@ package lincete.galaxyegg.di
 
 import androidx.room.Room
 import lincete.galaxyegg.data.database.EggDatabase
+import lincete.galaxyegg.utils.SharedPreferencesHelper
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
@@ -15,4 +16,6 @@ val persistenceModule = module {
     }
 
     single { get<EggDatabase>().eggDao }
+
+    single { SharedPreferencesHelper(application = androidApplication()) }
 }

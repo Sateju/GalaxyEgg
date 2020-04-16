@@ -8,8 +8,11 @@ import kotlinx.coroutines.withContext
 import lincete.galaxyegg.R
 import lincete.galaxyegg.data.database.EggDao
 import lincete.galaxyegg.data.database.EggEntity
+import lincete.galaxyegg.utils.SharedPreferencesHelper
 
-class GameViewModel(private val database: EggDao, application: Application) : AndroidViewModel(application) {
+class GameViewModel(private val database: EggDao,
+                    private val preferences: SharedPreferencesHelper,
+                    application: Application) : AndroidViewModel(application) {
 
     private val _isVolumeActive = MutableLiveData<Boolean>()
     val isVolumeActive: LiveData<Boolean>

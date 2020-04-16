@@ -7,5 +7,5 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
 
-    viewModel { GameViewModel(database = get(), application = androidApplication()) }
+    viewModel { GameViewModel(database = get(), preferences = get(), application = androidApplication()) }
 }
