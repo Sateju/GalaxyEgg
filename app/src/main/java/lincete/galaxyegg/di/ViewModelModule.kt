@@ -7,5 +7,10 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
 
-    viewModel { GameViewModel(database = get(), preferenceHelper = get(), application = androidApplication()) }
+    viewModel {
+        GameViewModel(database = get(),
+                preferenceHelper = get(),
+                eggBackgroundUseCase = get(),
+                application = androidApplication())
+    }
 }

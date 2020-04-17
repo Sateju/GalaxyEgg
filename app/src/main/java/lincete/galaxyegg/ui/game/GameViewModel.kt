@@ -8,11 +8,13 @@ import kotlinx.coroutines.withContext
 import lincete.galaxyegg.R
 import lincete.galaxyegg.data.database.EggDao
 import lincete.galaxyegg.data.database.EggEntity
+import lincete.galaxyegg.domain.usecase.GetEggBackgrounds
 import lincete.galaxyegg.utils.SharedPreferencesHelper
 import lincete.galaxyegg.utils.SharedPreferencesHelper.Companion.PREFERENCE_SOUND
 
 class GameViewModel(private val database: EggDao,
                     private val preferenceHelper: SharedPreferencesHelper,
+                    private val eggBackgroundUseCase: GetEggBackgrounds,
                     application: Application) : AndroidViewModel(application) {
 
     private val _isVolumeActive = MutableLiveData<Boolean>()
@@ -39,6 +41,10 @@ class GameViewModel(private val database: EggDao,
     private val _startSoundEvent = MutableLiveData<Boolean>()
     val startSoundEvent: LiveData<Boolean>
         get() = _startSoundEvent
+
+    private val _eggBackground = MutableLiveData<Int>()
+    val eggBackground: LiveData<Int>
+        get() = _eggBackground
 
     init {
         initializeSound()
@@ -116,5 +122,9 @@ class GameViewModel(private val database: EggDao,
     private fun startSound() {
         _startSoundEvent.value = false
         _startSoundEvent.value = true
+    }
+
+    private fun checkIfBackgroundShouldChange() {
+
     }
 }
