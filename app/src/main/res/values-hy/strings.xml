@@ -2,5 +2,5 @@
 <resources>
     <string name="banner_alert_confirm_button_text">Այո!</string>
     <string name="banner_alert_cancel_button_text">Ոչ հիմա</string>
-    <string name="ganado">Դու հաղթեցիր!</string>
+    <string name="win">Դու հաղթեցիր!</string>
 </resources>

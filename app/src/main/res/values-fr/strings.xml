@@ -2,5 +2,5 @@
 <resources>
     <string name="banner_alert_confirm_button_text">oui!</string>
     <string name="banner_alert_cancel_button_text">Pas maintenant</string>
-    <string name="ganado">vous avez gagne !</string>
+    <string name="win">vous avez gagne !</string>
 </resources>

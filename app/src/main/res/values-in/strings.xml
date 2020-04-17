@@ -2,5 +2,5 @@
 <resources>
     <string name="banner_alert_confirm_button_text">Ya!</string>
     <string name="banner_alert_cancel_button_text">Tidak sekarang</string>
-    <string name="ganado">Kamu menang!</string>
+    <string name="win">Kamu menang!</string>
 </resources>

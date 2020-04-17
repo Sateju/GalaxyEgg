@@ -2,5 +2,5 @@
 <resources>
     <string name="banner_alert_confirm_button_text">نعم</string>
     <string name="banner_alert_cancel_button_text">ليس الآن</string>
-    <string name="ganado">أنت تربح!</string>
+    <string name="win">أنت تربح!</string>
 </resources>

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Space Egg</string>
 
-    <string name="ganado">You win!</string>
+    <string name="win">You win!</string>
 
     <string name="game_sound_button_content_description">Activate or Deactivate Sound</string>
     <string name="game_egg_image_content_description">Egg</string>

@@ -2,5 +2,5 @@
 <resources>
     <string name="banner_alert_confirm_button_text">はい！</string>
     <string name="banner_alert_cancel_button_text">今はいい</string>
-    <string name="ganado">君の勝ち！</string>
+    <string name="win">君の勝ち！</string>
 </resources>
