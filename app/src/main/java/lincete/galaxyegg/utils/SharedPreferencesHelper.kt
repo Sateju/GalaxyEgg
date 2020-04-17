@@ -1,6 +1,7 @@
 package lincete.galaxyegg.utils
 
 import android.app.Application
+import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 
 class SharedPreferencesHelper(application: Application) {
@@ -9,7 +10,7 @@ class SharedPreferencesHelper(application: Application) {
         const val PREFERENCE_SOUND = "preference_sound"
     }
 
-    private val preferences = PreferenceManager.getDefaultSharedPreferences(application)
+    val sharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(application)
 
-    fun isPreferenceSoundEnabled(): Boolean = preferences.getBoolean(PREFERENCE_SOUND, false)
+    fun isPreferenceSoundEnabled(): Boolean = sharedPreferences.getBoolean(PREFERENCE_SOUND, true)
 }

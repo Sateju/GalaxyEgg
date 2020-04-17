@@ -35,12 +35,6 @@ class GameFragment : Fragment() {
         // This is used so that the binding can observe LiveData updates
         binding.lifecycleOwner = this
 
-        // Volume Button
-        gameViewModel.isVolumeActive.observe(viewLifecycleOwner, Observer { isVolumeActive ->
-            val volumeDrawable = if (isVolumeActive) R.drawable.volume_on else R.drawable.volume_off
-            binding.gameVolumeButton.setImageResource(volumeDrawable)
-        })
-
         setupAnimation()
         setupSound()
 
@@ -91,12 +85,20 @@ class GameFragment : Fragment() {
         gameViewModel.startSoundEvent.observe(viewLifecycleOwner, Observer { shouldStartSound ->
             mediaPlayer = MediaPlayer.create(context, R.raw.blop2)
             mediaPlayer.setOnCompletionListener { it.release() }
-            if (shouldStartSound) {
-                mediaPlayer.start()
-            } else {
-                mediaPlayer.stop()
-                mediaPlayer.release()
+
+            mediaPlayer.apply {
+                if (shouldStartSound) {
+                    start()
+                } else {
+                    stop()
+                    release()
+                }
             }
         })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        gameViewModel.checkPreferences()
     }
 }

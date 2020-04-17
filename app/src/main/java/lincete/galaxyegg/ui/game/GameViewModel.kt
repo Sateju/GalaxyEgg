@@ -11,11 +11,11 @@ import lincete.galaxyegg.data.database.EggEntity
 import lincete.galaxyegg.utils.SharedPreferencesHelper
 
 class GameViewModel(private val database: EggDao,
-                    private val preferences: SharedPreferencesHelper,
+                    private val preferenceHelper: SharedPreferencesHelper,
                     application: Application) : AndroidViewModel(application) {
 
     private val _isVolumeActive = MutableLiveData<Boolean>()
-    val isVolumeActive: LiveData<Boolean>
+    private val isVolumeActive: LiveData<Boolean>
         get() = _isVolumeActive
 
     private val _egg = MutableLiveData<EggEntity>()
@@ -40,14 +40,9 @@ class GameViewModel(private val database: EggDao,
         get() = _startSoundEvent
 
     init {
-        initializeVolumeButton()
         initializeEgg(application)
         _startAnimationEvent.value = false
         _startSoundEvent.value = false
-    }
-
-    private fun initializeVolumeButton() {
-        _isVolumeActive.value = false
     }
 
     private fun initializeEgg(application: Application) {
@@ -83,10 +78,6 @@ class GameViewModel(private val database: EggDao,
         }
     }
 
-    fun onVolumeChanged() {
-        _isVolumeActive.value = isVolumeActive.value?.not()
-    }
-
     fun onEggClicked() {
         egg.value?.apply {
             count = count.minus(1)
@@ -111,12 +102,12 @@ class GameViewModel(private val database: EggDao,
         _startAnimationEvent.value = true
     }
 
-    fun setSoundIsFinished() {
-        _startSoundEvent.value = false
-    }
-
     private fun startSound() {
         _startSoundEvent.value = false
         _startSoundEvent.value = true
+    }
+
+    fun checkPreferences() {
+        _isVolumeActive.value = preferenceHelper.isPreferenceSoundEnabled()
     }
 }
