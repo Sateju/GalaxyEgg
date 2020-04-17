@@ -37,6 +37,7 @@ class GameFragment : Fragment() {
 
         setupAnimation()
         setupSound()
+        setupEggImage()
 
         return binding.root
     }
@@ -94,6 +95,12 @@ class GameFragment : Fragment() {
                     release()
                 }
             }
+        })
+    }
+
+    private fun setupEggImage() {
+        gameViewModel.eggBackground.observe(viewLifecycleOwner, Observer { drawableId ->
+            binding.gameEggImage.setImageResource(drawableId)
         })
     }
 }

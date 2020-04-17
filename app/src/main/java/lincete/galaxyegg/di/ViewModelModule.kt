@@ -10,7 +10,7 @@ val viewModelModule = module {
     viewModel {
         GameViewModel(database = get(),
                 preferenceHelper = get(),
-                eggBackgroundUseCase = get(),
+                eggImageUseCase = get(),
                 application = androidApplication())
     }
 }

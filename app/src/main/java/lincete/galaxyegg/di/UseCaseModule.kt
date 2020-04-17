@@ -1,10 +1,10 @@
 package lincete.galaxyegg.di
 
-import lincete.galaxyegg.domain.usecase.GetEggBackgrounds
-import lincete.galaxyegg.domain.usecase.impl.GetLocalEggBackgrounds
+import lincete.galaxyegg.domain.usecase.GetEggImages
+import lincete.galaxyegg.domain.usecase.impl.GetLocalEggImages
 import org.koin.dsl.module
 
 val useCaseModule = module {
 
-    single<GetEggBackgrounds> { GetLocalEggBackgrounds() }
+    single<GetEggImages> { GetLocalEggImages() }
 }

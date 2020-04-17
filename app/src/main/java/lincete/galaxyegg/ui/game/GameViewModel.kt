@@ -8,14 +8,16 @@ import kotlinx.coroutines.withContext
 import lincete.galaxyegg.R
 import lincete.galaxyegg.data.database.EggDao
 import lincete.galaxyegg.data.database.EggEntity
-import lincete.galaxyegg.domain.usecase.GetEggBackgrounds
+import lincete.galaxyegg.domain.usecase.GetEggImages
 import lincete.galaxyegg.utils.SharedPreferencesHelper
 import lincete.galaxyegg.utils.SharedPreferencesHelper.Companion.PREFERENCE_SOUND
 
 class GameViewModel(private val database: EggDao,
                     private val preferenceHelper: SharedPreferencesHelper,
-                    private val eggBackgroundUseCase: GetEggBackgrounds,
+                    private val eggImageUseCase: GetEggImages,
                     application: Application) : AndroidViewModel(application) {
+
+    private val totalCount = application.resources.getInteger(R.integer.countdown_initial_value).toLong()
 
     private val _isVolumeActive = MutableLiveData<Boolean>()
     private val isVolumeActive: LiveData<Boolean>
@@ -68,8 +70,7 @@ class GameViewModel(private val database: EggDao,
             if (eggFromDatabase != null) {
                 _egg.value = eggFromDatabase
             } else {
-                val newEgg = EggEntity(count =
-                application.resources.getInteger(R.integer.countdown_initial_value).toLong())
+                val newEgg = EggEntity(count = totalCount)
                 _egg.value = newEgg
                 insert(newEgg)
             }
@@ -109,6 +110,7 @@ class GameViewModel(private val database: EggDao,
         if (isVolumeActive.value == true) {
             startSound()
         }
+        checkIfBackgroundShouldChange()
     }
 
     fun setAnimationIsFinished() {
@@ -125,6 +127,8 @@ class GameViewModel(private val database: EggDao,
     }
 
     private fun checkIfBackgroundShouldChange() {
-
+        eggCount.value?.let {
+            _eggBackground.value = eggImageUseCase.getEggImageFromCounter(it, totalCount)
+        }
     }
 }
