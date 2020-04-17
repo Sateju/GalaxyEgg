@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="si">Sim!</string>
-    <string name="no">Agora não</string>
+    <string name="banner_alert_confirm_button_text">Sim!</string>
+    <string name="banner_alert_cancel_button_text">Agora não</string>
     <string name="ganado">Você venceu!</string>
 </resources>

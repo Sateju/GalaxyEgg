@@ -69,7 +69,7 @@ public class OldMainActivity extends AppCompatActivity {
 
         }
         else{
-            Arriba.setText(R.string.ganado);
+            //Arriba.setText(R.string.ganado);
         }
 
         final ImageView img = (ImageView)findViewById(R.id.Imagen);

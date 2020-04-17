@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="ganado">hai vinto !</string>
-    <string name="no">Non adesso</string>
-    <string name="si">se!</string>
+    <string name="banner_alert_cancel_button_text">Non adesso</string>
+    <string name="banner_alert_confirm_button_text">se!</string>
 </resources>

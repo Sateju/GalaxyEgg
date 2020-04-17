@@ -5,7 +5,7 @@ import lincete.galaxyegg.domain.usecase.GetEggImages
 
 class GetLocalEggImages : GetEggImages {
 
-    override fun getEggImageIds(): List<Int> = listOf(
+    private val eggImageIds = listOf(
             R.drawable.egg1,
             R.drawable.egg2,
             R.drawable.egg3,
@@ -22,8 +22,7 @@ class GetLocalEggImages : GetEggImages {
             R.drawable.egg14)
 
     override fun getEggImageFromCounter(eggCount: Long, totalCount: Long): Int {
-        val imageIds = getEggImageIds()
-        val passValue: Double = totalCount.div(imageIds.size.toDouble())
+        val passValue: Double = totalCount.div(eggImageIds.size.toDouble())
 
         return when {
             eggCount < passValue -> return R.drawable.egg13

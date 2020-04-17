@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="si">Ja!</string>
-    <string name="no">Ikke lige nu</string>
+    <string name="banner_alert_confirm_button_text">Ja!</string>
+    <string name="banner_alert_cancel_button_text">Ikke lige nu</string>
     <string name="ganado">Du har vundet!</string>
 </resources>
