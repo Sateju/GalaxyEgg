@@ -9,6 +9,7 @@ import lincete.galaxyegg.R
 import lincete.galaxyegg.data.database.EggDao
 import lincete.galaxyegg.data.database.EggEntity
 import lincete.galaxyegg.utils.SharedPreferencesHelper
+import lincete.galaxyegg.utils.SharedPreferencesHelper.Companion.PREFERENCE_SOUND
 
 class GameViewModel(private val database: EggDao,
                     private val preferenceHelper: SharedPreferencesHelper,
@@ -40,9 +41,19 @@ class GameViewModel(private val database: EggDao,
         get() = _startSoundEvent
 
     init {
+        initializeSound()
         initializeEgg(application)
         _startAnimationEvent.value = false
         _startSoundEvent.value = false
+    }
+
+    private fun initializeSound() {
+        _isVolumeActive.value = preferenceHelper.isPreferenceSoundEnabled()
+        preferenceHelper.sharedPreferences.registerOnSharedPreferenceChangeListener { _, key ->
+            if (key == PREFERENCE_SOUND) {
+                _isVolumeActive.value = preferenceHelper.isPreferenceSoundEnabled()
+            }
+        }
     }
 
     private fun initializeEgg(application: Application) {
@@ -105,9 +116,5 @@ class GameViewModel(private val database: EggDao,
     private fun startSound() {
         _startSoundEvent.value = false
         _startSoundEvent.value = true
-    }
-
-    fun checkPreferences() {
-        _isVolumeActive.value = preferenceHelper.isPreferenceSoundEnabled()
     }
 }

@@ -96,9 +96,4 @@ class GameFragment : Fragment() {
             }
         })
     }
-
-    override fun onStart() {
-        super.onStart()
-        gameViewModel.checkPreferences()
-    }
 }
