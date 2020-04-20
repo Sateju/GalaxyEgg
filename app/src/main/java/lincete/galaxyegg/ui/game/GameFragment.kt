@@ -5,17 +5,22 @@ import android.os.Bundle
 import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import lincete.galaxyegg.R
 import lincete.galaxyegg.databinding.FragmentGameBinding
+import lincete.galaxyegg.domain.usecase.GetBannerAlert
+import lincete.galaxyegg.domain.usecase.impl.GetBannerAlertImpl
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class GameFragment : Fragment() {
 
     private val gameViewModel: GameViewModel by viewModel()
+    private val bannerUseCase: GetBannerAlert by inject()
 
     private lateinit var binding: FragmentGameBinding
     private lateinit var animation: Animation
@@ -38,6 +43,7 @@ class GameFragment : Fragment() {
         setupAnimation()
         setupSound()
         setupEggImage()
+        setupAds()
 
         return binding.root
     }
@@ -101,6 +107,24 @@ class GameFragment : Fragment() {
     private fun setupEggImage() {
         gameViewModel.eggBackground.observe(viewLifecycleOwner, Observer { drawableId ->
             binding.gameEggImage.setImageResource(drawableId)
+        })
+    }
+
+    private fun setupAds() {
+        gameViewModel.shouldShowAdd.observe(viewLifecycleOwner, Observer { shouldShowAdd ->
+            if (shouldShowAdd) {
+                bannerUseCase.getBannerAlert(requireContext(), object : GetBannerAlertImpl.BannerAlertClickListener {
+                    override fun onConfirmClicked() {
+                        gameViewModel.resetShouldShowAdd()
+                        Toast.makeText(context, "clicado si", Toast.LENGTH_SHORT).show()
+                    }
+
+                    override fun onCancelClicked() {
+                        gameViewModel.resetShouldShowAdd()
+                        Toast.makeText(context, "clicado no", Toast.LENGTH_SHORT).show()
+                    }
+                }).show()
+            }
         })
     }
 }

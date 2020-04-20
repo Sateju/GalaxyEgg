@@ -63,12 +63,12 @@ class GameViewModel(private val database: EggDao,
     val shouldShowAdd: LiveData<Boolean>
         get() = _shouldShowAdd
 
-    private var addTimer: CountDownTimer
+    private lateinit var adTimer: CountDownTimer
 
     init {
         initializeSound()
         initializeEgg()
-        startAddTimer()
+        initializeTimer()
         _startAnimationEvent.value = false
         _startSoundEvent.value = false
     }
@@ -96,8 +96,8 @@ class GameViewModel(private val database: EggDao,
         }
     }
 
-    private fun startAddTimer() {
-        addTimer = object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND) {
+    private fun initializeTimer() {
+        adTimer = object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND) {
             override fun onFinish() {
                 _shouldShowAdd.value = true
             }
@@ -106,7 +106,7 @@ class GameViewModel(private val database: EggDao,
 
             }
         }
-        addTimer.start()
+        adTimer.start()
     }
 
     private suspend fun getEggFromDatabase(): EggEntity? {
@@ -165,5 +165,6 @@ class GameViewModel(private val database: EggDao,
 
     fun resetShouldShowAdd() {
         _shouldShowAdd.value = false
+        adTimer.start()
     }
 }
