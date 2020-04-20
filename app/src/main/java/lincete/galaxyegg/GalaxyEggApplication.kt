@@ -1,6 +1,7 @@
 package lincete.galaxyegg
 
 import android.app.Application
+import com.google.android.gms.ads.MobileAds
 import lincete.galaxyegg.di.persistenceModule
 import lincete.galaxyegg.di.useCaseModule
 import lincete.galaxyegg.di.viewModelModule
@@ -16,5 +17,7 @@ class GalaxyEggApplication : Application() {
             modules(viewModelModule, persistenceModule, useCaseModule)
             androidContext(this@GalaxyEggApplication)
         }
+
+        MobileAds.initialize(this)
     }
 }
