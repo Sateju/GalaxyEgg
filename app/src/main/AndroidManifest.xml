@@ -13,17 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- Test ads -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544/1033173712"/>
-
-        <!-- Pro ads -->
-        <!--
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-6174269253938832/2941077908"/>
-            -->
+            android:value="${adMobAppId}"/>
 
         <activity android:name=".ui.MainActivity">
             <intent-filter>

@@ -16,12 +16,25 @@ android {
         versionName rootProject.ext.version_name
 
         testInstrumentationRunner rootProject.ext.test_instrumentation_runner
+
+        manifestPlaceholders.adMobAppId = admob_app_id
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "default"
+    productFlavors {
+        pre {
+
+        }
+
+        pro {
+
         }
     }
 
