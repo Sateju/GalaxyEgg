@@ -1,6 +1,6 @@
 package lincete.galaxyegg
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
 import com.google.android.gms.ads.MobileAds
 import lincete.galaxyegg.di.persistenceModule
 import lincete.galaxyegg.di.useCaseModule
@@ -8,7 +8,7 @@ import lincete.galaxyegg.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class GalaxyEggApplication : Application() {
+class GalaxyEggApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()

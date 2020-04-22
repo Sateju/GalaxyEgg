@@ -17,6 +17,7 @@ android {
 
         testInstrumentationRunner rootProject.ext.test_instrumentation_runner
 
+        multiDexEnabled true
         manifestPlaceholders.adMobAppId = admob_app_id
     }
 
@@ -24,17 +25,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "REWARDED_AD_ID", "\"${rewarded_ad_id}\"")
+            //resValue("string", "rewarded_ad_id", "${rewarded_ad_id}")
         }
-    }
-
-    flavorDimensions "default"
-    productFlavors {
-        pre {
-
-        }
-
-        pro {
-
+        debug {
+            buildConfigField("String", "REWARDED_AD_ID", "\"${rewarded_ad_test_id}\"")
+            //resValue("string", "rewarded_ad_id", "${rewarded_ad_test_id}")
         }
     }
 
@@ -81,6 +77,9 @@ dependencies {
 
     // Koin
     implementation "org.koin:koin-android-viewmodel:$koin_core_version"
+
+    // MultiDex
+    implementation "com.android.support:multidex:$multi_dex_version"
 
     // Testing
     testImplementation "junit:junit:$junit_version"
