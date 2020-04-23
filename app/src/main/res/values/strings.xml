@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">Space Egg</string>
 
-    <string name="win">You win!</string>
-
     <string name="game_sound_button_content_description">Activate or Deactivate Sound</string>
     <string name="game_egg_image_content_description">Egg</string>
     <string name="game_multiplier_text" translatable="false">X10</string>
@@ -12,6 +10,5 @@
 
     <string name="preferences_fragment_title">Settings</string>
     <string name="preferences_sound_title">Sound</string>
-
 
 </resources>
