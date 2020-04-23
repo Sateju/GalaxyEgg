@@ -5,15 +5,12 @@
 
     <string name="game_sound_button_content_description">Activate or Deactivate Sound</string>
     <string name="game_egg_image_content_description">Egg</string>
+    <string name="game_multiplier_text" translatable="false">X10</string>
 
     <string name="menu_settings_title">Settings</string>
 
     <string name="preferences_fragment_title">Settings</string>
     <string name="preferences_sound_title">Sound</string>
 
-    <string name="banner_alert_title">Atención!</string>
-    <string name="banner_alert_content">Quieres ver un anuncio? Los anuncios hacen éste juego posible. Gracias por jugar.</string>
-    <string name="banner_alert_confirm_button_text">Yes!</string>
-    <string name="banner_alert_cancel_button_text">Not now</string>
 
 </resources>

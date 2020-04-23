@@ -52,6 +52,10 @@ class GameViewModel(private val database: EggDao,
     val shouldShowAdd: LiveData<Boolean>
         get() = _shouldShowAdd
 
+    private val _isMultiplierEnabled = MutableLiveData<Boolean>()
+    private val isMultiplierEnabled: LiveData<Boolean>
+        get() = _isMultiplierEnabled
+
     init {
         initializeSound()
         initializeEgg()
@@ -100,9 +104,16 @@ class GameViewModel(private val database: EggDao,
         }
     }
 
+    // On clicks
+
+    fun onRewardedAdClicked() {
+        _shouldShowAdd.value = true
+    }
+
     fun onEggClicked() {
+        val damage = if (isMultiplierEnabled.value == true) 1 else 10
         egg.value?.apply {
-            count = count.minus(1)
+            count = count.minus(damage)
             _eggCount.value = count
         }
         egg.value?.let { egg ->
@@ -117,9 +128,17 @@ class GameViewModel(private val database: EggDao,
         checkIfBackgroundShouldChange()
     }
 
+    // public methods
+
     fun setAnimationIsFinished() {
         _startAnimationEvent.value = false
     }
+
+    fun enableMultiplier() {
+        _isMultiplierEnabled.value = true
+    }
+
+    // private methods
 
     private fun startAnimation() {
         _startAnimationEvent.value = true
@@ -134,5 +153,9 @@ class GameViewModel(private val database: EggDao,
         eggCount.value?.let {
             _eggBackground.value = eggImageUseCase.getEggImageFromCounter(it, totalCount)
         }
+    }
+
+    private fun resetShouldShowAd() {
+        _shouldShowAdd.value = false
     }
 }
