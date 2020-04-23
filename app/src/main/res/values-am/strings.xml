@@ -1,0 +1,13 @@
+<resources>
+
+    <string name="game_sound_button_content_description">ድምጽን ያግብሩ ወይም ያቦዝኑ</string>
+    <string name="game_egg_image_content_description">እንቁላል</string>
+    <string name="game_rewarded_ad_not_loaded">ማስታወቂያ ገና አልተጫነም</string>
+
+    <string name="menu_settings_title">ቅንጅቶች</string>
+
+    <string name="preferences_fragment_title">ቅንጅቶች</string>
+    <string name="preferences_sound_title">ድምፅ</string>
+    <string name="win">ታሸንፋለህ!</string>
+
+</resources>

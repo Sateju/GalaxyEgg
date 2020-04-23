@@ -1,0 +1,13 @@
+<resources>
+
+    <string name="game_sound_button_content_description">Kunna ko Kashe Sauti</string>
+    <string name="game_egg_image_content_description">Kwai</string>
+    <string name="game_rewarded_ad_not_loaded">Ad bai rigaya an saka kaya ba</string>
+
+    <string name="menu_settings_title">Saiti</string>
+
+    <string name="preferences_fragment_title">Saiti</string>
+    <string name="preferences_sound_title">Sauti</string>
+    <string name="win">Kun yi nasara!</string>
+
+</resources>

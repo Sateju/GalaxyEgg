@@ -1,6 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="banner_alert_confirm_button_text">Այո!</string>
-    <string name="banner_alert_cancel_button_text">Ոչ հիմա</string>
+
+    <string name="game_sound_button_content_description">Ակտիվացրեք կամ անջատեք ձայնը</string>
+    <string name="game_egg_image_content_description">Ձու</string>
+    <string name="game_rewarded_ad_not_loaded">Գովազդը դեռ բեռնված չէ</string>
+
+    <string name="menu_settings_title">Կարգավորումներ</string>
+
+    <string name="preferences_fragment_title">Կարգավորումներ</string>
+    <string name="preferences_sound_title">Ձայնային</string>
     <string name="win">Դու հաղթեցիր!</string>
+
 </resources>

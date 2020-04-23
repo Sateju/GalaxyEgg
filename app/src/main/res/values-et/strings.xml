@@ -1,0 +1,13 @@
+<resources>
+
+    <string name="game_sound_button_content_description">Heli aktiveerimine või desaktiveerimine</string>
+    <string name="game_egg_image_content_description">Muna</string>
+    <string name="game_rewarded_ad_not_loaded">Kuulutust pole veel laaditud</string>
+
+    <string name="menu_settings_title">Seadistused</string>
+
+    <string name="preferences_fragment_title">Seadistused</string>
+    <string name="preferences_sound_title">Heli</string>
+    <string name="win">Sina võidad!</string>
+
+</resources>

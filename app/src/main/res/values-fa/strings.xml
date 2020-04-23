@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="banner_alert_confirm_button_text">بله</string>
-    <string name="banner_alert_cancel_button_text">الان نه</string>
-    <string name="win">شما برنده شده اید</string>
-</resources>
