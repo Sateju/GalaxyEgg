@@ -1,7 +1,6 @@
 package lincete.galaxyegg.ui.game
 
 import android.app.Application
-import android.os.CountDownTimer
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,16 +16,6 @@ class GameViewModel(private val database: EggDao,
                     private val preferenceHelper: SharedPreferencesHelper,
                     private val eggImageUseCase: GetEggImages,
                     application: Application) : AndroidViewModel(application) {
-
-    companion object {
-        private const val DONE = 0L
-
-        // Countdown time interval
-        private const val ONE_SECOND = 1000L
-
-        // Seconds to show the Add
-        private const val COUNTDOWN_TIME = 6000L
-    }
 
     private val totalCount = application.resources.getInteger(R.integer.countdown_initial_value).toLong()
 
@@ -63,12 +52,9 @@ class GameViewModel(private val database: EggDao,
     val shouldShowAdd: LiveData<Boolean>
         get() = _shouldShowAdd
 
-    private lateinit var adTimer: CountDownTimer
-
     init {
         initializeSound()
         initializeEgg()
-        initializeTimer()
         _startAnimationEvent.value = false
         _startSoundEvent.value = false
     }
@@ -94,19 +80,6 @@ class GameViewModel(private val database: EggDao,
             }
             _eggCount.value = _egg.value?.count
         }
-    }
-
-    private fun initializeTimer() {
-        adTimer = object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND) {
-            override fun onFinish() {
-                _shouldShowAdd.value = true
-            }
-
-            override fun onTick(p0: Long) {
-
-            }
-        }
-        adTimer.start()
     }
 
     private suspend fun getEggFromDatabase(): EggEntity? {
@@ -161,10 +134,5 @@ class GameViewModel(private val database: EggDao,
         eggCount.value?.let {
             _eggBackground.value = eggImageUseCase.getEggImageFromCounter(it, totalCount)
         }
-    }
-
-    fun resetShouldShowAdd() {
-        _shouldShowAdd.value = false
-        adTimer.start()
     }
 }

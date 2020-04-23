@@ -12,15 +12,12 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import lincete.galaxyegg.R
 import lincete.galaxyegg.databinding.FragmentGameBinding
-import lincete.galaxyegg.domain.usecase.GetBannerAlert
-import lincete.galaxyegg.domain.usecase.impl.GetBannerAlertImpl
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class GameFragment : Fragment() {
 
     private val gameViewModel: GameViewModel by viewModel()
-    private val bannerUseCase: GetBannerAlert by inject()
 
     private lateinit var binding: FragmentGameBinding
     private lateinit var animation: Animation
@@ -113,17 +110,7 @@ class GameFragment : Fragment() {
     private fun setupAds() {
         gameViewModel.shouldShowAdd.observe(viewLifecycleOwner, Observer { shouldShowAdd ->
             if (shouldShowAdd) {
-                bannerUseCase.getBannerAlert(requireContext(), object : GetBannerAlertImpl.BannerAlertClickListener {
-                    override fun onConfirmClicked() {
-                        gameViewModel.resetShouldShowAdd()
-                        Toast.makeText(context, "clicado si", Toast.LENGTH_SHORT).show()
-                    }
 
-                    override fun onCancelClicked() {
-                        gameViewModel.resetShouldShowAdd()
-                        Toast.makeText(context, "clicado no", Toast.LENGTH_SHORT).show()
-                    }
-                }).show()
             }
         })
     }
