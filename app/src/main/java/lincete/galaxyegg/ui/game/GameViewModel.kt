@@ -1,6 +1,8 @@
 package lincete.galaxyegg.ui.game
 
 import android.app.Application
+import android.os.CountDownTimer
+import android.text.format.DateUtils
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,8 +20,11 @@ class GameViewModel(private val database: EggDao,
                     application: Application) : AndroidViewModel(application) {
 
     companion object {
-
         const val MULTIPLIER_DEFAULT_VALUE = 1
+
+        private const val REWARD_DONE = 0L
+        private const val REWARD_TIME_ONE_SECOND = 1000L
+        private const val REWARD_COUNTDOWN_TIME = 90 * 1000L
     }
 
     private val totalCount = application.resources.getInteger(R.integer.countdown_initial_value).toLong()
@@ -61,12 +66,35 @@ class GameViewModel(private val database: EggDao,
     val multiplier: LiveData<Int>
         get() = _multiplier
 
+    // Countdown time
+    private val _rewardCurrentTime = MutableLiveData<Long>()
+    private val rewardCurrentTime: LiveData<Long>
+        get() = _rewardCurrentTime
+
+    val rewardCountDownText = Transformations.map(rewardCurrentTime) { time ->
+        DateUtils.formatElapsedTime(time)
+    }
+
+    private val timer: CountDownTimer
+
     init {
         initializeSound()
         initializeEgg()
         _startAnimationEvent.value = false
         _startSoundEvent.value = false
         _multiplier.value = MULTIPLIER_DEFAULT_VALUE
+
+        timer = object : CountDownTimer(REWARD_COUNTDOWN_TIME, REWARD_TIME_ONE_SECOND) {
+
+            override fun onTick(millisUntilFinished: Long) {
+                _rewardCurrentTime.value = millisUntilFinished / REWARD_TIME_ONE_SECOND
+            }
+
+            override fun onFinish() {
+                _rewardCurrentTime.value = REWARD_DONE
+                _multiplier.value = MULTIPLIER_DEFAULT_VALUE
+            }
+        }
     }
 
     private fun initializeSound() {
@@ -146,6 +174,10 @@ class GameViewModel(private val database: EggDao,
 
     fun resetShouldShowAd() {
         _shouldShowAdd.value = false
+    }
+
+    fun startRewardTimer() {
+        timer.start()
     }
 
     // private methods

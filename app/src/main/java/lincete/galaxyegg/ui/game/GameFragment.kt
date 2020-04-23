@@ -127,6 +127,7 @@ class GameFragment : Fragment() {
 
             override fun onRewardedAdClosed() {
                 rewardedAd = createAndLoadRewardedAd()
+                gameViewModel.startRewardTimer()
             }
         }
 
