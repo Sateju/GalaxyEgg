@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreferenceCompat
+        android:defaultValue="false"
+        android:icon="@drawable/volume_on"
+        android:key="preference_sound"
+        android:title="@string/preferences_sound_title"
+        app:defaultValue="true"/>
+</PreferenceScreen>

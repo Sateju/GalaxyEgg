@@ -1,4 +1,4 @@
-package lincete.GalaxyEgg;
+package lincete.galaxyegg;
 
 import org.junit.Test;
 

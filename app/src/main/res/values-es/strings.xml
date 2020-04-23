@@ -1,6 +1,13 @@
 <resources>
-    <integer name="trolaso">1000000</integer>
-    <string name="no">Ahora no</string>
-    <string name="si">Sí!.</string>
-    <string name="ganado">Has ganado!</string>
+
+    <string name="game_sound_button_content_description">Activar o desactivar sonido</string>
+    <string name="game_egg_image_content_description">Huevo</string>
+    <string name="game_rewarded_ad_not_loaded">El anuncio aún no se ha cargado</string>
+
+    <string name="menu_settings_title">Configuraciones</string>
+
+    <string name="preferences_fragment_title">Configuraciones</string>
+    <string name="preferences_sound_title">Sonido</string>
+    <string name="win">¡Tú ganas!</string>
+
 </resources>
