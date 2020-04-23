@@ -17,6 +17,11 @@ class GameViewModel(private val database: EggDao,
                     private val eggImageUseCase: GetEggImages,
                     application: Application) : AndroidViewModel(application) {
 
+    companion object {
+
+        const val MULTIPLIER_DEFAULT_VALUE = 1
+    }
+
     private val totalCount = application.resources.getInteger(R.integer.countdown_initial_value).toLong()
 
     private val _isVolumeActive = MutableLiveData<Boolean>()
@@ -52,15 +57,16 @@ class GameViewModel(private val database: EggDao,
     val shouldShowAdd: LiveData<Boolean>
         get() = _shouldShowAdd
 
-    private val _isMultiplierEnabled = MutableLiveData<Boolean>()
-    private val isMultiplierEnabled: LiveData<Boolean>
-        get() = _isMultiplierEnabled
+    private val _multiplier = MutableLiveData<Int>()
+    val multiplier: LiveData<Int>
+        get() = _multiplier
 
     init {
         initializeSound()
         initializeEgg()
         _startAnimationEvent.value = false
         _startSoundEvent.value = false
+        _multiplier.value = MULTIPLIER_DEFAULT_VALUE
     }
 
     private fun initializeSound() {
@@ -111,7 +117,7 @@ class GameViewModel(private val database: EggDao,
     }
 
     fun onEggClicked() {
-        val damage = if (isMultiplierEnabled.value == true) 1 else 10
+        val damage = multiplier.value ?: MULTIPLIER_DEFAULT_VALUE
         egg.value?.apply {
             count = count.minus(damage)
             _eggCount.value = count
@@ -134,8 +140,12 @@ class GameViewModel(private val database: EggDao,
         _startAnimationEvent.value = false
     }
 
-    fun enableMultiplier() {
-        _isMultiplierEnabled.value = true
+    fun enableMultiplier(multiplier: Int) {
+        _multiplier.value = multiplier
+    }
+
+    fun resetShouldShowAd() {
+        _shouldShowAdd.value = false
     }
 
     // private methods
@@ -153,9 +163,5 @@ class GameViewModel(private val database: EggDao,
         eggCount.value?.let {
             _eggBackground.value = eggImageUseCase.getEggImageFromCounter(it, totalCount)
         }
-    }
-
-    private fun resetShouldShowAd() {
-        _shouldShowAdd.value = false
     }
 }

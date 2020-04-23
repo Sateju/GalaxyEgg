@@ -26,11 +26,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField("String", "REWARDED_AD_ID", "\"${rewarded_ad_id}\"")
-            //resValue("string", "rewarded_ad_id", "${rewarded_ad_id}")
         }
         debug {
             buildConfigField("String", "REWARDED_AD_ID", "\"${rewarded_ad_test_id}\"")
-            //resValue("string", "rewarded_ad_id", "${rewarded_ad_test_id}")
         }
     }
 

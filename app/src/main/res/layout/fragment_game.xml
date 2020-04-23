@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_view_margin_large"
+            android:enabled="@{gameViewModel.multiplier == 1}"
             android:onClick="@{() -> gameViewModel.onRewardedAdClicked()}"
             android:text="@string/game_multiplier_text"
             app:icon="@drawable/ic_slow_motion_video_black_24dp"
