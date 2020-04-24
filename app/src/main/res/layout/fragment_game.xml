@@ -37,10 +37,10 @@
             android:contentDescription="@string/game_egg_image_content_description"
             android:onClick="@{() -> gameViewModel.onEggClicked()}"
             android:src="@drawable/egg1"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/game_rewarded_ad_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/game_countdown_text" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/game_rewarded_ad_button"
