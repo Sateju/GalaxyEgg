@@ -156,6 +156,7 @@ class GameFragment : Fragment() {
 
             override fun onUserEarnedReward(reward: RewardItem) {
                 gameViewModel.enableMultiplier(reward.amount)
+                gameViewModel.startRewardTimer()
             }
 
             override fun onRewardedAdOpened() {
@@ -164,7 +165,6 @@ class GameFragment : Fragment() {
 
             override fun onRewardedAdClosed() {
                 rewardedAd = createAndLoadRewardedAd()
-                gameViewModel.startRewardTimer()
             }
         }
 
