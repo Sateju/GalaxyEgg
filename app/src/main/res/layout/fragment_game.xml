@@ -51,7 +51,7 @@
             android:onClick="@{() -> gameViewModel.onRewardedAdClicked()}"
             android:text="@string/game_multiplier_text"
             app:icon="@drawable/ic_slow_motion_video_black_24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/game_banner"
             app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -62,9 +62,17 @@
             android:layout_margin="@dimen/default_view_margin_large"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/game_banner"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="00:00" />
+
+        <FrameLayout
+            android:id="@+id/game_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

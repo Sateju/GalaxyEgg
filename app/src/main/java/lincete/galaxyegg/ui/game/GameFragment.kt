@@ -2,6 +2,7 @@ package lincete.galaxyegg.ui.game
 
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -9,7 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
-import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.*
 import com.google.android.gms.ads.rewarded.RewardItem
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdCallback
@@ -28,6 +29,26 @@ class GameFragment : Fragment() {
     private lateinit var animation: Animation
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var rewardedAd: RewardedAd
+    private lateinit var adView: AdView
+
+    private var initialLayoutComplete = false
+
+    private val adSize: AdSize
+        get() {
+            val display = activity?.windowManager?.defaultDisplay
+            val outMetrics = DisplayMetrics()
+            display?.getMetrics(outMetrics)
+
+            val density = outMetrics.density
+
+            var adWidthPixels = binding.gameBanner.width.toFloat()
+            if (adWidthPixels == 0f) {
+                adWidthPixels = outMetrics.widthPixels.toFloat()
+            }
+
+            val adWidth = (adWidthPixels / density).toInt()
+            return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(context, adWidth)
+        }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -114,6 +135,22 @@ class GameFragment : Fragment() {
     }
 
     private fun setupAds() {
+        // Banner
+        adView = AdView(context)
+        binding.gameBanner.addView(adView)
+        MobileAds.setRequestConfiguration(
+                RequestConfiguration.Builder()
+                        .setTestDeviceIds(listOf(AdRequest.DEVICE_ID_EMULATOR))
+                        .build()
+        )
+        binding.gameBanner.viewTreeObserver.addOnGlobalLayoutListener {
+            if (!initialLayoutComplete) {
+                initialLayoutComplete = true
+                loadBanner()
+            }
+        }
+
+        // Rewarded
         rewardedAd = createAndLoadRewardedAd()
         val rewardedAdCallback = object : RewardedAdCallback() {
 
@@ -157,5 +194,29 @@ class GameFragment : Fragment() {
 
         ad.loadAd(AdRequest.Builder().build(), rewardedAdLoadCallback)
         return ad
+    }
+
+    private fun loadBanner() {
+        adView.adUnitId = BuildConfig.BANNER_AD_ID
+        adView.adSize = adSize
+
+        val adRequest = AdRequest.Builder().build()
+
+        adView.loadAd(adRequest)
+    }
+
+    override fun onPause() {
+        adView.pause()
+        super.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        adView.resume()
+    }
+
+    override fun onDestroy() {
+        adView.destroy()
+        super.onDestroy()
     }
 }
