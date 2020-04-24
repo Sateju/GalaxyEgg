@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="gameViewModel"
+            type="lincete.galaxyegg.ui.game.GameViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/space_background">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/game_countdown_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_view_margin_large"
+            android:gravity="center"
+            android:text="@{gameViewModel.eggCountText}"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/game_countdown_text_size"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1000000" />
+
+        <ImageView
+            android:id="@+id/game_egg_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/game_egg_image_content_description"
+            android:onClick="@{() -> gameViewModel.onEggClicked()}"
+            android:src="@drawable/egg1"
+            app:layout_constraintBottom_toTopOf="@id/game_rewarded_ad_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/game_countdown_text" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/game_rewarded_ad_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_view_margin_large"
+            android:enabled="@{gameViewModel.multiplier == 1}"
+            android:onClick="@{() -> gameViewModel.onRewardedAdClicked()}"
+            android:text="@string/game_multiplier_text"
+            app:icon="@drawable/ic_slow_motion_video_black_24dp"
+            app:layout_constraintBottom_toTopOf="@id/game_banner"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/game_reward_duration_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{gameViewModel.rewardCountDownText}"
+            android:layout_margin="@dimen/default_view_margin_large"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/game_banner"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="00:00" />
+
+        <FrameLayout
+            android:id="@+id/game_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

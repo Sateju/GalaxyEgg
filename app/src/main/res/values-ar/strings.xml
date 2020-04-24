@@ -1,6 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="si">نعم</string>
-    <string name="no">ليس الآن</string>
-    <string name="ganado">أنت تربح!</string>
+
+    <string name="game_sound_button_content_description">تنشيط أو إلغاء تنشيط الصوت</string>
+    <string name="game_egg_image_content_description">بيضة</string>
+    <string name="game_rewarded_ad_not_loaded">لم يتم تحميل الإعلان حتى الآن</string>
+
+    <string name="menu_settings_title">إعدادات</string>
+
+    <string name="preferences_fragment_title">إعدادات</string>
+    <string name="preferences_sound_title">صوت</string>
+    <string name="win">فزت!</string>
+
 </resources>
