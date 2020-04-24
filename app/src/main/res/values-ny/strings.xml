@@ -1,0 +1,13 @@
+<resources>
+
+    <string name="game_sound_button_content_description">Yambitsani kapena Sinthani Phokoso</string>
+    <string name="game_egg_image_content_description">Dzira</string>
+    <string name="game_rewarded_ad_not_loaded">Malonda sanakwezebe</string>
+
+    <string name="menu_settings_title">Makonda</string>
+
+    <string name="preferences_fragment_title">Makonda</string>
+    <string name="preferences_sound_title">Zomveka</string>
+    <string name="win">Mukupambana!</string>
+
+</resources>

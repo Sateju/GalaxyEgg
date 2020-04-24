@@ -1,0 +1,13 @@
+<resources>
+
+    <string name="game_sound_button_content_description">Kenya activate kapa o e koale</string>
+    <string name="game_egg_image_content_description">Lehe</string>
+    <string name="game_rewarded_ad_not_loaded">Papatso ha e so jarolloe</string>
+
+    <string name="menu_settings_title">Litlhophiso</string>
+
+    <string name="preferences_fragment_title">Litlhophiso</string>
+    <string name="preferences_sound_title">Modumo</string>
+    <string name="win">O oa hlola!</string>
+
+</resources>

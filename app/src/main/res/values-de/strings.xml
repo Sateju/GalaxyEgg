@@ -1,6 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="banner_alert_confirm_button_text">ja!</string>
-    <string name="banner_alert_cancel_button_text">Nicht jetzt</string>
-    <string name="win">Sie gewonnen!</string>
+
+    <string name="game_sound_button_content_description">Sound aktivieren oder deaktivieren</string>
+    <string name="game_egg_image_content_description">Ei</string>
+    <string name="game_rewarded_ad_not_loaded">Anzeige wurde noch nicht geladen</string>
+
+    <string name="menu_settings_title">die Einstellungen</string>
+
+    <string name="preferences_fragment_title">die Einstellungen</string>
+    <string name="preferences_sound_title">Klang</string>
+    <string name="win">Du gewinnst!</string>
+
 </resources>

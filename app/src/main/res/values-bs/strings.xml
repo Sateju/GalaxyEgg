@@ -1,0 +1,13 @@
+<resources>
+
+    <string name="game_sound_button_content_description">Aktivirajte ili deaktivirajte zvuk</string>
+    <string name="game_egg_image_content_description">Jaje</string>
+    <string name="game_rewarded_ad_not_loaded">Oglas se još nije učitao</string>
+
+    <string name="menu_settings_title">Podešavanja</string>
+
+    <string name="preferences_fragment_title">Podešavanja</string>
+    <string name="preferences_sound_title">Zvuk</string>
+    <string name="win">Pobijedio si!</string>
+
+</resources>
