@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <integer name="countdown_initial_value">14</integer>
+    <integer name="countdown_initial_value">1000000</integer>
 </resources>

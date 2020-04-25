@@ -12,7 +12,7 @@ buildscript {
 
         application_id = 'lincete.GalaxyEgg'
         version_code = 5
-        version_name = '5.0.0'
+        version_name = '5.1.0'
         test_instrumentation_runner = 'androidx.test.runner.AndroidJUnitRunner'
     }
 

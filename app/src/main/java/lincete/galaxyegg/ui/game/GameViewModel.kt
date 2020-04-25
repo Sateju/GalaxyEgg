@@ -1,6 +1,7 @@
 package lincete.galaxyegg.ui.game
 
 import android.app.Application
+import android.content.SharedPreferences
 import android.os.CountDownTimer
 import android.text.format.DateUtils
 import androidx.lifecycle.*
@@ -76,6 +77,7 @@ class GameViewModel(private val database: EggDao,
     }
 
     private val timer: CountDownTimer
+    private lateinit var sharedPreferencesListener: SharedPreferences.OnSharedPreferenceChangeListener
 
     init {
         initializeSound()
@@ -99,11 +101,12 @@ class GameViewModel(private val database: EggDao,
 
     private fun initializeSound() {
         _isVolumeActive.value = preferenceHelper.isPreferenceSoundEnabled()
-        preferenceHelper.sharedPreferences.registerOnSharedPreferenceChangeListener { _, key ->
+        sharedPreferencesListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
             if (key == PREFERENCE_SOUND) {
                 _isVolumeActive.value = preferenceHelper.isPreferenceSoundEnabled()
             }
         }
+        preferenceHelper.sharedPreferences.registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
     }
 
     private fun initializeEgg() {
